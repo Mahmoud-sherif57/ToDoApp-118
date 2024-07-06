@@ -1,29 +1,45 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/view-model/utils/app_colors.dart';
 
-ThemeData darkTheme =ThemeData(
-
-  appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.gray
+ThemeData darkTheme = ThemeData(
+  appBarTheme: AppBarTheme(backgroundColor: AppColors.gray),
+  inputDecorationTheme: InputDecorationTheme(
+    contentPadding: EdgeInsets.all(10.sp),
+    border: const OutlineInputBorder(),
   ),
-  scaffoldBackgroundColor: AppColors.black,
+  buttonTheme: ButtonThemeData(
+    buttonColor: AppColors.purple,
+    textTheme: ButtonTextTheme.primary,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: AppColors.purple,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.sp),
+      ),
+    ),
+  ),
+
+  // iconTheme: IconThemeData(color: AppColors.gray),
+  // iconButtonTheme: IconButtonThemeData(
+  //   style: ButtonStyle(
+  //     iconColor: WidgetStatePropertyAll(AppColors.gray),
+  //   ),
+  // ),
+  scaffoldBackgroundColor: AppColors.black38,
   textTheme: TextTheme(
     bodySmall: TextStyle(
-      fontSize: 20.sp,
-      color:AppColors.white,
+      fontSize: 14.sp,
+      color: AppColors.black,
     ),
     bodyMedium: TextStyle(
-      fontSize: 25.sp,
-      color: AppColors.white,
+      fontSize: 16.sp,
+      color: AppColors.black,
     ),
     bodyLarge: TextStyle(
-      fontSize: 30.sp,
-      color:AppColors.white,
+      fontSize: 18.sp,
+      color: AppColors.black,
     ),
   ),
-
-
 );

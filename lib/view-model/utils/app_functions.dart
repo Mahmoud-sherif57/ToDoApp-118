@@ -24,6 +24,10 @@ class AppFunctions {
     Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
 
+  static void pop(BuildContext context) {
+    Navigator.pop(context);
+  }
+
   static void pushAndReplacement(BuildContext context, Widget screen) {
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => screen));

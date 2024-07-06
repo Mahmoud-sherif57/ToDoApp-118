@@ -1,3 +1,18 @@
 {
-  "smile": "ابتسم"
+  "toDoApp" : "تطبيق المهام",
+  "addTask" : "إضافه مهمه",
+  "task" : "مهمه",
+  "description" : "الوصف",
+  "edit" : "تعديل",
+  "title" : "العنوان",
+  "subtitle" : "عنوان فرعي",
+  "startDate" : "تاريخ البدء",
+  "endDate" : "تاريخ الإنتهاء",
+  "logout" : "تسجيل الخروج",
+  "delete" : "حذف",
+  "submit": "إرسال",
+  "image": "الصوره",
+  "thisFieldsIsRequired": "هذا الحقل مطلوب"
+
+
 }

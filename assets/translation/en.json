@@ -1,3 +1,17 @@
 {
-"smile": "smile"
+  "toDoApp" : "To Do App",
+  "addTask" : "Add Task",
+  "task" : "Task",
+  "description" : "Description",
+  "edit" : "Edit",
+  "title" : "Title",
+  "subtitle" : "Subtitle",
+  "startDate" : "Start Date",
+  "endDate" : "End Date",
+  "logout" : "Log Out",
+  "delete" : "Delete",
+  "submit": "Submit",
+  "image": "Image",
+  "thisFieldsIsRequired": "This field is required"
+
 }

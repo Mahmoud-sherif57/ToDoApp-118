@@ -9,14 +9,13 @@ void main() async {
 
   runApp(
     EasyLocalization(
-      supportedLocales:  [Locale('en'),Locale('ar')],
+      supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/translation',
-      fallbackLocale:Locale('en') ,
+      fallbackLocale: Locale('en'),
       child: ToDoApp(),
     ),
   );
 }
-
 
 /// to generate keys file for localization
 ///flutter pub run easy_localization:generate -S assets/translation -O lib/view-model/utils -o local_keys.g.dart -f keys

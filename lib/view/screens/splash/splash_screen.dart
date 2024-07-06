@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     Future.delayed(const Duration(seconds: 4),() {
-      AppFunctions.pushAndRemove(context,const HomeScreen());
+      AppFunctions.pushAndRemove(context, HomeScreen());
     },);
   }
   @override
