@@ -39,10 +39,10 @@ class HomeScreen extends StatelessWidget {
                   ));
             },
           ),
-          SizedBox(),
+          const SizedBox(),
           IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.logout,
               color: AppColors.black,
             ),
@@ -61,25 +61,37 @@ class HomeScreen extends StatelessWidget {
             },
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: BlocBuilder<TaskCubit, TaskState>(
         builder: (context, state) {
-          return ListView.separated(
-            itemBuilder: (context, index) => TaskWidget(
-              onDeleteIconPressed: () {
-                TaskCubit.get(context).deleteTask(index);
-              },
-              task: TaskCubit.get(context).tasks[index],
-            ),
-            itemCount: TaskCubit.get(context).tasks.length,
-            separatorBuilder: (context, index) => SizedBox(
-              height: 12.h,
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 12.h,
-            ),
+          return Column(
+            children: [
+              // we added Task widget to show us how many task we have till now
+              Text(
+                '${TaskCubit.get(context).tasks.length}  ${LocaleKeys.tasks.tr()}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) => TaskWidget(
+                    onDeleteIconPressed: () {
+                      TaskCubit.get(context).deleteTask(index);
+                    },
+                    task: TaskCubit.get(context).tasks[index],
+                  ),
+                  itemCount: TaskCubit.get(context).tasks.length,
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 12.h,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 12.w,
+                    vertical: 12.h,
+                  ),
+                ),
+              )
+            ],
           );
         },
       ),

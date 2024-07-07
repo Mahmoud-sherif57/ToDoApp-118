@@ -13,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool _visible = false;
 
+  @override
   void initState () {
     super.initState();
 
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     Future.delayed(const Duration(seconds: 4),() {
-      AppFunctions.pushAndRemove(context, HomeScreen());
+      AppFunctions.pushAndRemove(context, const HomeScreen());
     },);
   }
   @override

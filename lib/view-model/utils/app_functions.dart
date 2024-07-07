@@ -10,12 +10,12 @@ class AppFunctions {
         onPressed: () {
           // print(context.setLocale.toString());
           if (context.locale.toString() == 'en') {
-            context.setLocale(Locale('ar'));
+            context.setLocale(const Locale('ar'));
           }else {
-            context.setLocale(Locale('en'));
+            context.setLocale(const Locale('en'));
           }
         },
-        icon: Icon(Icons.translate));
+        icon: const Icon(Icons.translate));
   }
 
 

@@ -61,7 +61,7 @@ class AddTaskWidget extends StatelessWidget {
             },
           ),
           SizedBox(height: 12.sp),
-          // //  image form field
+          //  image form field
           // TextFormField(
           //   textInputAction: TextInputAction.next,
           //   controller: TaskCubit.get(context).imageController,
@@ -78,6 +78,7 @@ class AddTaskWidget extends StatelessWidget {
           // SizedBox(height: 12.sp),
 
           // start date text form field
+
           TextFormField(
             textInputAction: TextInputAction.next,
             controller: TaskCubit.get(context).startDateController,

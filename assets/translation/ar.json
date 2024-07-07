@@ -12,6 +12,9 @@
   "delete" : "حذف",
   "submit": "إرسال",
   "image": "الصوره",
+  "tasks": "مهمه",
+  "editTask": "تعديل المهمه",
+  "save": "حفظ",
   "thisFieldsIsRequired": "هذا الحقل مطلوب"
 
 

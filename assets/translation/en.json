@@ -12,6 +12,9 @@
   "delete" : "Delete",
   "submit": "Submit",
   "image": "Image",
+  "tasks": "Tasks",
+  "save": "Save",
+  "editTask": "Edit Task",
   "thisFieldsIsRequired": "This field is required"
 
 }

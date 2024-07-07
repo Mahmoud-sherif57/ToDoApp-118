@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/view-model/utils/app_colors.dart';
 
 ThemeData darkTheme = ThemeData(
-  appBarTheme: AppBarTheme(backgroundColor: AppColors.gray),
+  appBarTheme: const AppBarTheme(backgroundColor: AppColors.gray),
   inputDecorationTheme: InputDecorationTheme(
     contentPadding: EdgeInsets.all(10.sp),
     border: const OutlineInputBorder(),
   ),
-  buttonTheme: ButtonThemeData(
+  buttonTheme: const ButtonThemeData(
     buttonColor: AppColors.purple,
     textTheme: ButtonTextTheme.primary,
   ),

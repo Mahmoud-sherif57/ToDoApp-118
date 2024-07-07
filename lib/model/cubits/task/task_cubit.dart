@@ -1,14 +1,12 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/model/cubits/task/task_state.dart';
-
 import '../../task_model.dart';
 
-class TaskCubit extends Cubit<TaskState>{
+class TaskCubit extends Cubit<TaskState> {
   TaskCubit() : super(InitialTaskState());
 
-  static TaskCubit get(context)=> BlocProvider.of(context);
+  static TaskCubit get(context) => BlocProvider.of(context);
   GlobalKey<FormState> formState = GlobalKey<FormState>();
 
   TextEditingController titleController = TextEditingController();
@@ -19,10 +17,8 @@ class TaskCubit extends Cubit<TaskState>{
 
   List<TaskModel> tasks = [];
 
-
-
-  void addTask(){
-    TaskModel newTask =TaskModel(
+  void addTask() {
+    TaskModel newTask = TaskModel(
       title: titleController.text,
       description: descriptionController.text,
       startDate: startDateController.text,
@@ -34,8 +30,7 @@ class TaskCubit extends Cubit<TaskState>{
     emit(AddTaskState());
   }
 
-
-  void clearControllers(){
+  void clearControllers() {
     titleController.clear();
     descriptionController.clear();
     startDateController.clear();
@@ -43,12 +38,20 @@ class TaskCubit extends Cubit<TaskState>{
     imageController.clear();
   }
 
-  void deleteTask(int index){
+  void deleteTask(int index) {
     tasks.removeAt(index);
     emit(DeleteTaskState());
   }
 
 
-
 }
 
+
+// to edit the textFormField
+// void updateTask(TaskModel updatedTask) {
+//   final index = tasks.indexWhere((tasks) => tasks.title == updatedTask.title);
+//   if (index != -1) {
+//     tasks[index] = updatedTask;
+//     emit(TasksUpdated());
+//   }
+// }

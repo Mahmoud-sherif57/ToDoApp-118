@@ -14,6 +14,9 @@ abstract class  LocaleKeys {
   static const delete = 'delete';
   static const submit = 'submit';
   static const image = 'image';
+  static const tasks = 'tasks';
+  static const editTask = 'editTask';
+  static const save = 'save';
   static const thisFieldsIsRequired = 'thisFieldsIsRequired';
 
 }

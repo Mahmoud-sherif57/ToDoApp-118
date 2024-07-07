@@ -15,7 +15,7 @@ class InfoWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12.sp),
       decoration: BoxDecoration(
-          color: AppColors.babyblue,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: AppColors.purple, width: 2.w)),
       child: Row(
