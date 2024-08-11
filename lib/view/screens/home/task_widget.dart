@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:to_do_app/model/task_model.dart';
-import 'package:to_do_app/view-model/utils/app_functions.dart';
-import 'package:to_do_app/view-model/utils/local_keys.g.dart';
+import 'package:ToDoApp/model/task_model.dart';
+import 'package:ToDoApp/view-model/utils/app_functions.dart';
+import 'package:ToDoApp/view-model/localization/local_keys.g.dart';
 import '../../../view-model/utils/app_colors.dart';
 import 'date_info_widget.dart';
 
@@ -43,75 +43,87 @@ class TaskWidget extends StatelessWidget {
               ),
               PopupMenuButton(
                 itemBuilder: (context) => [
+                  // first line to delete the task ..
                   PopupMenuItem(
-                    child: TextButton.icon(
-                      onPressed: onDeleteIconPressed,
-                      label: const Text(LocaleKeys.delete).tr(),
-                      icon: const Icon(
+                    child: ListTile(
+                      onTap: onDeleteIconPressed,
+                      title: const Text(LocaleKeys.delete).tr(),
+                      leading: const Icon(
                         Icons.delete,
                         color: AppColors.red,
                       ),
                     ),
                   ),
+
+                  // second line to edit the task ..
                   PopupMenuItem(
-                    child: TextButton.icon(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                          final titleController = TextEditingController( text: task.title);
-                          final descriptionController =TextEditingController(text: task.description);
-                          return AlertDialog(
-                            title: const Text(LocaleKeys.editTask).tr(),
-                            content:Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextField(
-                                  controller: titleController,
-                                  decoration: InputDecoration(labelText: LocaleKeys.title.tr()),
-                                ),
-                                SizedBox(height: 12.h,),
-                                TextField(
-                                  controller: descriptionController,
-                                  decoration: InputDecoration(labelText: LocaleKeys.description.tr()),
-                                ),
-                              ],
-                            ) ,
-                            actions: [ TextButton(
-                              onPressed: ()
-                              {
-                            // if (titleController.text.isNotEmpty && descriptionController.text.isNotEmpty) {
-                            // TaskCubit.get(context).updateTask(
-                            // task.
-                            // copyWith(
-                            // title: titleController.text,
-                            // description: descriptionController.text,
-                            // ),
-                            // );
-                                AppFunctions.pop(context);
-                            // }
-                            },
-                              child: Text(LocaleKeys.save.tr()),
-                            ),],
-                          );
-                        },);
-                      },
-
-
-                      label: const Text(LocaleKeys.edit).tr(),
-                      icon: const Icon(
+                    child: ListTile(
+                      title: const Text(LocaleKeys.edit).tr(),
+                      leading: const Icon(
                         Icons.edit,
                         color: AppColors.red,
                       ),
+                      onTap: () {
+                        showDialog(
+                          // dialog to edit the task ..
+                          context: context,
+                          builder: (context) {
+                            final titleController =
+                                TextEditingController(text: task.title);
+                            final descriptionController =
+                                TextEditingController(text: task.description);
+                            return AlertDialog(
+                              title: const Text(LocaleKeys.editTask).tr(),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  TextField(
+                                    // first field to edit the title ..
+                                    controller: titleController,
+                                    decoration: InputDecoration(
+                                        labelText: LocaleKeys.title.tr()),
+                                  ),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  TextField(
+                                    //second field to edit the description ..
+                                    controller: descriptionController,
+                                    decoration: InputDecoration(
+                                        labelText: LocaleKeys.description.tr()),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton(
+                                  // this button to save the changes in editing field ..
+                                  onPressed: () {
+                                    // if (titleController.text.isNotEmpty && descriptionController.text.isNotEmpty) {
+                                    // TaskCubit.get(context).updateTask(
+                                    // task.
+                                    // copyWith(
+                                    // title: titleController.text,
+                                    // description: descriptionController.text,
+                                    // ),
+                                    // );
+                                    AppFunctions.pop(context);
+                                    // }
+                                  },
+                                  child: Text(LocaleKeys.save.tr()),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
                     ),
-                    // onTap:() => DeleteTaskState(),
                   ),
                 ],
               ),
             ],
           ),
           Text(
-            task.description ?? "No Subtilte Found",
+            task.description ?? "No Subtitle Found",
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
@@ -134,6 +146,7 @@ class TaskWidget extends StatelessWidget {
             // ),
             SizedBox(height: 10.h),
           IntrinsicHeight(
+            // to make the two date container be at the same high
             child: Row(
               children: [
                 Expanded(

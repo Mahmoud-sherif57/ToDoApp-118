@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:to_do_app/view-model/utils/app_colors.dart';
+import 'package:ToDoApp/view-model/utils/app_colors.dart';
 
 ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(backgroundColor: AppColors.warmWhite),

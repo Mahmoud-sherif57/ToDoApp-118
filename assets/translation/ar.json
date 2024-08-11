@@ -15,7 +15,25 @@
   "tasks": "مهمه",
   "editTask": "تعديل المهمه",
   "save": "حفظ",
-  "thisFieldsIsRequired": "هذا الحقل مطلوب"
+  "thisFieldsIsRequired": "هذا الحقل مطلوب",
+  "logIn" : "تسجيل الدخول",
+  "signUp" : "الإشتراك ",
+  "enterYourPassword" : "أدخل الرقم السري",
+  "email" : "البريد الإلكتروني",
+  "password" : "كلمه المرور",
+  "forgetPassword" : "هل نسيت كلمه المرور ؟",
+  "doNotHaveAnAccount" : "ليس لديك حساب ؟",
+  "enterYourCredentialsToContinue" : "أدخل بيانات الإعتماد الخاصة بك للمتابعة",
+  "userName" : "إسم المستخدم",
+  "wrongPassword" : "كلمه المرور خاطئه",
+  "alreadyHaveAnAccount" : "لديك حساب بالفعل ؟ ",
+  "register" : "الإشتراك ",
+  "confirmPassword" : "تأكيد كلمه المرور",
+  "noTasks" : "لا يوجد مهام",
+  "uploadImage" : "تحميل صورة",
+  "uploadedSuccessfully" : "تم التحميل بنجاح"
+
+
 
 
 }

@@ -15,6 +15,25 @@
   "tasks": "Tasks",
   "save": "Save",
   "editTask": "Edit Task",
-  "thisFieldsIsRequired": "This field is required"
+  "thisFieldsIsRequired": "This field is required",
+  "logIn" : "Log in",
+  "signUp" : "sign up",
+  "enterYourPassword" : "Enter Your Password",
+  "email"  : "Email",
+  "password": "Password",
+  "forgetPassword" : "forget password?",
+  "doNotHaveAnAccount" : "Don't have an account?",
+  "enterYourCredentialsToContinue" : "Enter your credentials to continue",
+  "userName" : "UserName",
+  "wrongPassword" : "Wrong password",
+  "alreadyHaveAnAccount" : "Already have an account?",
+  "register" : "Register",
+  "noTasks" : "No tasks",
+  "uploadImage" : "Upload Image",
+  "uploadedSuccessfully" : "Uploaded Successfully"
+
+
+
 
 }
+

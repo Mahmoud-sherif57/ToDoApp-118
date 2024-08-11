@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "376100725024",
+    "project_id": "todoapp118",
+    "storage_bucket": "todoapp118.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376100725024:android:46af1224eb9021bab33745",
+        "android_client_info": {
+          "package_name": "com.Eraasoft.ToDoApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376100725024-2oahtdetj5nmdnn8cb2p5cn47gv2brpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPr4GBEa2GxSy36ONyWUGb-HVap5jddOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376100725024-2oahtdetj5nmdnn8cb2p5cn47gv2brpg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "376100725024-t7s48jeokn5tmm9ua8195ee12ij5qeqb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Eraasoft.toDoApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

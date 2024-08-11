@@ -25,7 +25,7 @@ class AppFunctions {
   }
 
   static void pop(BuildContext context) {
-    Navigator.pop(context);
+    Navigator.canPop(context);
   }
 
   static void pushAndReplacement(BuildContext context, Widget screen) {
