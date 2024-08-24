@@ -22,8 +22,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authCubit = AuthCubit.get(context); // just to minimize the code ..
-    // we created BlocProvider here not in (main/ multiBlocProvider/) because i'll use it once in the loginScreen
-    // and will destroy, but in (main) will be exist forever
 
     return Scaffold(
         appBar: AppBar(
@@ -43,12 +41,11 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Text(
                         LocaleKeys.logIn.tr(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 25.sp),
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Text(
                         LocaleKeys.enterYourPassword.tr(),
-                        style: const TextStyle(color: AppColors.gray),
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
                       SizedBox(height: 25.h),
                       // making the email field
@@ -58,8 +55,7 @@ class LoginScreen extends StatelessWidget {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           labelText: LocaleKeys.email.tr(),
-                          labelStyle:
-                              const TextStyle(color: AppColors.darkGray),
+                          labelStyle: Theme.of(context).textTheme.labelMedium,
                         ),
                       ),
 
@@ -68,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                       ),
 
                       // making the password field
-                      // we used BlocBuilder here to handle the hidden & unhiddenIcon
+                      // we used BlocBuilder here to handle toggling the password..
                       BlocBuilder<AuthCubit, AuthState>(
                         buildWhen: (previous, current) {
                           return current is TogglePasswordState;
@@ -83,10 +79,10 @@ class LoginScreen extends StatelessWidget {
                             obscureText: hidden,
                             // in line (15) we created this var
                             decoration: InputDecoration(
-                              helperText: LocaleKeys.forgetPassword.tr(),
+                              // helperText: LocaleKeys.forgetPassword.tr(),
                               labelText: LocaleKeys.password.tr(),
                               labelStyle:
-                                  const TextStyle(color: AppColors.darkGray),
+                                  Theme.of(context).textTheme.labelMedium,
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     authCubit.togglePassword();
@@ -97,19 +93,33 @@ class LoginScreen extends StatelessWidget {
                         },
                       ),
 
+                      TextButton(
+                        onPressed: () {
+                          /// make a page to reset the password and navigate to this screen
+                        },
+                        child: Text(
+                          LocaleKeys.forgetPassword.tr(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(color: AppColors.purple),
+                        ),
+                      ),
+
                       SizedBox(
                         height: 40.h,
                       ),
-                      // we used BlocConsumer here because we need BlocBuilder& BlocListener  and the BlocConsumer have them both .
+                      // we used BlocConsumer here because we need BlocBuilder& BlocListener and the BlocConsumer have them both .
                       BlocConsumer<AuthCubit, AuthState>(
                         listener: (context, state) {
                           if (state is LoggingSuccessfulState) {
-                            AppFunctions.push(context, const HomeScreen());
+                            AppFunctions.pushAndRemove(
+                                context, const HomeScreen());
                           } else if (state is LoggingErrorState) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(state.message),
-                                backgroundColor: AppColors.red,
+                                backgroundColor: AppColors.purple,
                               ),
                             );
                           }
@@ -137,7 +147,7 @@ class LoginScreen extends StatelessWidget {
                                   // the button will be unClickable as long as the state is loading .
 
                                   // here we called the login method (authCubit)
-                                  authCubit.loginFirebase();
+                                  authCubit.login();
                                 },
 
                                 // start creating (LogIn ButtonIcon )
@@ -149,13 +159,12 @@ class LoginScreen extends StatelessWidget {
                                     color: AppColors.purple,
                                   ),
                                   child: Center(
-                                    child: Text(
-                                      LocaleKeys.logIn.tr(),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    child: Text(LocaleKeys.logIn.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w600)),
                                   ),
                                 ),
                               ),
@@ -171,14 +180,18 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        LocaleKeys.doNotHaveAnAccount.tr(),
-                        style: const TextStyle(fontWeight: FontWeight.w600),
-                      ),
+                      Text(LocaleKeys.doNotHaveAnAccount.tr(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(fontWeight: FontWeight.w600)),
                       TextButton(
                         child: Text(
                           LocaleKeys.signUp.tr(),
-                          style: const TextStyle(color: Color(0xff53B175)),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(color: AppColors.registerColor),
                         ),
                         onPressed: () {
                           AppFunctions.push(context, const RegisterScreen());

@@ -12,7 +12,7 @@ class DioHelper {
       baseUrl: EndPoints.baseUrl,
       connectTimeout: const Duration(
           seconds:
-              10), //if i have problem with the request..the request will stop after 30s
+              10), //if we had a problem with the request..the request will stop after 10s
       receiveDataWhenStatusError: true,
       headers: {
         "Accept": "application/json",
@@ -34,14 +34,14 @@ class DioHelper {
 
   // customising the methods of endPoints ( get/ post/ put/ patch/ delete)  .
 
-  // 1st endPoint (get)
   static const FlutterSecureStorage storage = FlutterSecureStorage();
 
+  // 1st endPoint (get)
   static Future<Response> get({
     // we used Future<> because i don't know the time it will take to get the response..
     required String endPoint,
     Map<String, dynamic>? params,
-    Map? body,
+    Map<String, dynamic>? body,
     Map<String, dynamic>? headers,
     bool? withToken = false,
   }) async {
@@ -52,8 +52,8 @@ class DioHelper {
           "Authorization": "Bearer $token",
         });
       }
-      _dio.options.headers.addAll(headers ??
-          {}); // we can use this line if the headers changes with every endPoint ,
+      _dio.options.headers.addAll(headers ?? {});
+      // we can use this line if the headers changes with every endPoint ,
       // but we can ignore here because the headers are common in all our endPoints so we wrote it in BaseOption in dio .
       return await _dio.get(
         endPoint,
@@ -173,30 +173,30 @@ class DioHelper {
   }
 
 // get => pokemons..
-
-  static Future<Response> getPokemons({
-    // we used Future<> because i don't know the time it will take to get the response..
-    required String endPoint,
-    Map<String, dynamic>? params,
-    Map<String, dynamic>? body,
-    Map<String, dynamic>? headers,
-    bool? withToken = false,
-  }) async {
-    try {
-      if (withToken ?? false) {
-        String? token = await storage.read(key: SharedKeys.token);
-        _dio.options.headers.addAll({
-          "Authorization": "Bearer $token",
-        });
-      }
-      _dio.options.headers.addAll(headers ?? {});
-      return await _dio.get(
-        endPoint,
-        queryParameters: params,
-        data: body,
-      );
-    } catch (error) {
-      rethrow;
-    }
-  }
+//
+//   static Future<Response> getPokemons({
+//     // we used Future<> because i don't know the time it will take to get the response..
+//     required String endPoint,
+//     Map<String, dynamic>? params,
+//     Map<String, dynamic>? body,
+//     Map<String, dynamic>? headers,
+//     bool? withToken = false,
+//   }) async {
+//     try {
+//       if (withToken ?? false) {
+//         String? token = await storage.read(key: SharedKeys.token);
+//         _dio.options.headers.addAll({
+//           "Authorization": "Bearer $token",
+//         });
+//       }
+//       _dio.options.headers.addAll(headers ?? {});
+//       return await _dio.get(
+//         endPoint,
+//         queryParameters: params,
+//         data: body,
+//       );
+//     } catch (error) {
+//       rethrow;
+//     }
+//   }
 }

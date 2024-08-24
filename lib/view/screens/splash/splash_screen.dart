@@ -29,9 +29,10 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 4),
       () async {
-        const storage = FlutterSecureStorage(); // we called the secure storage to see if we have (token) skip loginScreen and go to HomeScreen
+        const storage = FlutterSecureStorage();
+        // we called the flutterSecureStorage to see if we have the (token) skip loginScreen and go to HomeScreen..
         String? value = await storage.read(key: SharedKeys.token);
-        if (value != null) { // if storage couldn't find (token) => (value=null) this condition will be skipped..
+        if (value != null) { // if storage could find (token) => (we have the token) ..
           AppFunctions.pushAndRemove(context, const HomeScreen());
         } else {
           AppFunctions.pushAndRemove(context, const LoginScreen());

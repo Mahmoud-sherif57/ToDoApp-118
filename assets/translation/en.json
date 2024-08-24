@@ -30,7 +30,8 @@
   "register" : "Register",
   "noTasks" : "No tasks",
   "uploadImage" : "Upload Image",
-  "uploadedSuccessfully" : "Uploaded Successfully"
+  "uploadedSuccessfully" : "Uploaded Successfully",
+  "confirmPassword" : "Confirm Password"
 
 
 

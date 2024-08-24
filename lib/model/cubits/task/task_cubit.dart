@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,18 +20,20 @@ class TaskCubit extends Cubit<TaskState> {
   TextEditingController endDateController = TextEditingController();
   TextEditingController imageController = TextEditingController();
 
-  List<TaskModel> tasks = [];
+  List<TaskModel> tasksList = [];
 
   //  start 1st function (addTask) ..
-  void addTask() {
+  addTask() {
     TaskModel newTask = TaskModel(
       title: titleController.text,
       description: descriptionController.text,
       startDate: startDateController.text,
       endDate: endDateController.text,
       image: imageController.text,
+      myImage: MyImage,
+      // image: imageController.text,
     );
-    tasks.add(newTask);
+    tasksList.add(newTask);
     clearControllers();
     emit(AddTaskState());
   }
@@ -46,13 +46,13 @@ class TaskCubit extends Cubit<TaskState> {
     startDateController.clear();
     endDateController.clear();
     imageController.clear();
-    image = null ; // to remove the picked image form add task widget ..
+    MyImage = null; // to remove the picked image form add task widget ..
   }
   //  end of 2d function (clearControllers) ..
 
   // start of 3d function (deleteTask)
   void deleteTask(int index) {
-    tasks.removeAt(index);
+    tasksList.removeAt(index);
     emit(DeleteTaskSuccessState());
   }
   // end of 3d function (deleteTask)..
@@ -66,18 +66,18 @@ class TaskCubit extends Cubit<TaskState> {
         withToken: true,
         params: {'page': page}).then(
       (value) {
-        //to clear the tasks list an add the tasks again otherwise everytime we call (getAllTasks) the list add the same tasks again..
-        tasks.clear();
+        //to clear the tasksList and add the tasks again otherwise everytime we call (getAllTasks) the list add the same tasks again..
+        tasksList.clear();
         page = 1;
         hasMore = true;
         for (var element in value.data['data']['tasks']) {
           TaskModel task = TaskModel.fromJson(element);
-          tasks.add(task);
+          tasksList.add(task);
         }
-        if (tasks.length < 15) {
+        if (tasksList.length < 15) {
           hasMore = false;
         }
-        emit(GetAllTasksSuccessState(tasks));
+        emit(GetAllTasksSuccessState(tasksList));
       },
     ).catchError((error) {
       if (error is DioException) {
@@ -89,9 +89,11 @@ class TaskCubit extends Cubit<TaskState> {
           emit(
               UnauthenticatedState()); // then send this emit to blocConsumer in (homePage)..
         }
-        emit(GetAllTasksFailedState(
-            error:
-                error.response?.data.toString() ?? "something went wrong 2"));
+        emit(
+          GetAllTasksFailedState(
+              error:
+                  error.response?.data.toString() ?? "something went wrong 2"),
+        );
         return;
       }
       debugPrint(error.response?.data.toString() ?? '');
@@ -109,24 +111,25 @@ class TaskCubit extends Cubit<TaskState> {
       description: descriptionController.text,
       startDate: startDateController.text,
       endDate: endDateController.text,
-      status: 'new',
+      status: 'new', // Because it is a new task the status will be always "new"
     );
     // the next step equal (newTask) but i need to do it to send the image i picked (which it's type is File );
-    FormData formData =FormData.fromMap({
+    FormData formData = FormData.fromMap({
       ...newTask.toJson(),
-      if(image!= null)
-      'image': await MultipartFile.fromFile(image?.path?? "")
+      if (MyImage != null)
+        'image': await MultipartFile.fromFile(MyImage?.path ?? "")
     });
 
     await DioHelper.post(
       endPoint: EndPoints.tasks,
       withToken: true,
+      // body: newTask.toJson(), // modified 24/8
       body: formData,
     ).then(
       (value) {
-        TaskModel task = TaskModel.fromJson(value.data[
+        TaskModel newTask = TaskModel.fromJson(value.data[
             'data']); // to get the data from response and save it in (task) then add to list(tasks)
-        tasks.add(task);
+        tasksList.add(newTask);
         clearControllers();
         emit(AddTaskSuccessState());
       },
@@ -146,11 +149,11 @@ class TaskCubit extends Cubit<TaskState> {
   Future<void> deleteTaskFromAPI(int taskIndex) async {
     emit(DeleteTaskLoadingState());
     await DioHelper.delete(
-      endPoint: '${EndPoints.tasks}/${tasks[taskIndex].id}',
+      endPoint: '${EndPoints.tasks}/${tasksList[taskIndex].id}',
       withToken: true,
     ).then(
       (value) {
-        tasks.removeAt(taskIndex);
+        tasksList.removeAt(taskIndex);
         emit(DeleteTaskSuccessState());
       },
     ).catchError((error) {
@@ -191,12 +194,12 @@ class TaskCubit extends Cubit<TaskState> {
       (value) {
         for (var element in value.data['data']['tasks']) {
           TaskModel task = TaskModel.fromJson(element);
-          tasks.add(task);
+          tasksList.add(task);
         }
         if ((value.data['data']['tasks'] as List<dynamic>).length < 15) {
           hasMore = false;
         }
-        emit(GetMoreTasksSuccessState(tasks));
+        emit(GetMoreTasksSuccessState(tasksList));
       },
     ).catchError((error) {
       if (error is DioException) {
@@ -217,9 +220,10 @@ class TaskCubit extends Cubit<TaskState> {
 
   // start the 9 function (Image Picker)..
   final ImagePicker picker = ImagePicker();
-  XFile? image;
+  XFile? MyImage;
   void pickImageFromGallery() async {
-    image = await picker.pickImage(source: ImageSource.gallery,imageQuality: 50);
+    MyImage =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     emit(PickImageState());
   }
   // end of the 9 function

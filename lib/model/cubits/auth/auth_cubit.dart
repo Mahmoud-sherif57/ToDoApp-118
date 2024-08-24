@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +30,15 @@ class AuthCubit extends Cubit<AuthState> {
     emit(TogglePasswordState());
   }
   // end of (togglePassword Function) .
+
+  // start clearing controllers
+  void clearControllers (){
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+  }
+  // end of clearing controllers
 
   //2d method to handle actions when i call the (logIn Function) with API.
   // start (logIn Function)
@@ -77,22 +85,22 @@ class AuthCubit extends Cubit<AuthState> {
   // end of (logIn Function)
 
   // start loginFirebase function
-  Future<void> loginFirebase() async {
-    emit(LoggingLoadingState());
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
-        .then((value) {
-      print(value.user?.uid);
-      print(value.user?.email);
-      print(value.user?.emailVerified);
-      emit(LoggingSuccessfulState());
-    }).catchError((error) {
-      print(error.toString());
-      emit(LoggingErrorState(
-          "something went wrong on login with firebase ${error.toString()}"));
-    });
-  }
+  // Future<void> loginFirebase() async {
+  //   emit(LoggingLoadingState());
+  //   FirebaseAuth.instance
+  //       .signInWithEmailAndPassword(
+  //           email: emailController.text, password: passwordController.text)
+  //       .then((value) {
+  //     print(value.user?.uid);
+  //     print(value.user?.email);
+  //     print(value.user?.emailVerified);
+  //     emit(LoggingSuccessfulState());
+  //   }).catchError((error) {
+  //     print(error.toString());
+  //     emit(LoggingErrorState(
+  //         "something went wrong on login with firebase ${error.toString()}"));
+  //   });
+  // }
   //  end of loginFirebase function
 
   // (CREATING OUR REGISTER FUNCTION) .
@@ -109,7 +117,7 @@ class AuthCubit extends Cubit<AuthState> {
       },
     ).then(
       (value) async {
-        debugPrint(value.data ?? "Register Successfully");
+        // debugPrint(value.data ?? "Register Successfully");
         const storage = FlutterSecureStorage();
         await storage.write(
             key: SharedKeys.token, value: value.data['data']['token']);
@@ -118,12 +126,11 @@ class AuthCubit extends Cubit<AuthState> {
     ).catchError((error) {
       if (error is DioException) {
         debugPrint(error.response?.data.toString());
-        debugPrint('we have an error here ,heeeeeeelp');
         emit(RegisterErrorState(
             error.response?.data['message'] ?? 'something went wrong 1'));
         return;
       }
-      debugPrint(error.response?.data?.toString());
+      // debugPrint(error.response?.data?.toString());
       emit(RegisterErrorState(
           'something went wrong with logging ${error.toString()}'));
       throw (error);
@@ -131,21 +138,21 @@ class AuthCubit extends Cubit<AuthState> {
   } // end of (register Function)
 
   // (CREATING OUR REGISTER WITH FIREBASE FUNCTION) 1/8/2024
-  Future<void> registerFireBase() async {
-    emit(RegisterLoadingState());
-    await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
-        .then((value) {
-      emit(RegisterSuccessState());
-      print(value.user?.uid);
-      print(value.user?.email);
-      print(value.user?.emailVerified);
-    }).catchError((error) {
-      emit(RegisterErrorState(
-          "something went wrong on login firebase => ${error.toString()}"));
-      print(error.tostring());
-      throw error;
-    });
-  }
+  // Future<void> registerFireBase() async {
+  //   emit(RegisterLoadingState());
+  //   await FirebaseAuth.instance
+  //       .createUserWithEmailAndPassword(
+  //           email: emailController.text, password: passwordController.text)
+  //       .then((value) {
+  //     emit(RegisterSuccessState());
+  //     print(value.user?.uid);
+  //     print(value.user?.email);
+  //     print(value.user?.emailVerified);
+  //   }).catchError((error) {
+  //     emit(RegisterErrorState(
+  //         "something went wrong on login firebase => ${error.toString()}"));
+  //     print(error.to string());
+  //     throw error;
+  //   });
+  // }
 }

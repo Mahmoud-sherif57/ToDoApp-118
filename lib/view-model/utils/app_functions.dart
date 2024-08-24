@@ -2,24 +2,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AppFunctions {
-  // (translationIcon)
-
+  //  (1)  (translationIcon)
   static translationIcon(BuildContext context) {
-    return
-    IconButton(
+    return IconButton(
         onPressed: () {
-          // print(context.setLocale.toString());
           if (context.locale.toString() == 'en') {
             context.setLocale(const Locale('ar'));
-          }else {
+          } else {
+            // it means that the local is "ar" so set the local to "en" ..
             context.setLocale(const Locale('en'));
           }
         },
         icon: const Icon(Icons.translate));
   }
 
-
- // (navigation)
+  // (2) (navigation)
   static void push(BuildContext context, Widget screen) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
@@ -37,7 +34,7 @@ class AppFunctions {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => screen),
-          (route) => false,
+      (route) => false,
     );
   }
 }

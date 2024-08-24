@@ -42,8 +42,7 @@ class RegisterScreen extends StatelessWidget {
                     children: [
                       Text(
                         LocaleKeys.register.tr(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 25.sp),
+                        style:Theme.of(context).textTheme.titleLarge
                       ),
 
                       SizedBox(height: 25.h),
@@ -55,7 +54,7 @@ class RegisterScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           labelText: LocaleKeys.userName.tr(),
                           labelStyle:
-                              const TextStyle(color: AppColors.darkGray),
+                          Theme.of(context).textTheme.labelSmall,
                         ),
                       ),
 
@@ -70,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           labelText: LocaleKeys.email.tr(),
                           labelStyle:
-                              const TextStyle(color: AppColors.darkGray),
+                          Theme.of(context).textTheme.labelSmall,
                         ),
                       ),
 
@@ -90,13 +89,13 @@ class RegisterScreen extends StatelessWidget {
                             controller: authCubit.passwordController,
                             keyboardType: TextInputType.visiblePassword,
                             maxLength: 15,
-                            textInputAction: TextInputAction.done,
+                            textInputAction: TextInputAction.next,
                             obscureText: hidden,
                             // in line (15) we created this var
                             decoration: InputDecoration(
                               labelText: LocaleKeys.password.tr(),
                               labelStyle:
-                                  const TextStyle(color: AppColors.darkGray),
+                              Theme.of(context).textTheme.labelSmall,
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     authCubit.togglePassword();
@@ -108,6 +107,7 @@ class RegisterScreen extends StatelessWidget {
                       ),
 
                       // making the confirm password field ..
+
                       BlocBuilder<AuthCubit, AuthState>(
                         buildWhen: (previous, current) {
                           return current is TogglePasswordState;
@@ -122,9 +122,9 @@ class RegisterScreen extends StatelessWidget {
                             obscureText: hidden,
                             // in line (15) we created this var
                             decoration: InputDecoration(
-                              labelText: LocaleKeys.confirmPassword.tr(),
+                              labelText:  LocaleKeys.confirmPassword.tr(),
                               labelStyle:
-                                  const TextStyle(color: AppColors.darkGray),
+                              Theme.of(context).textTheme.labelSmall,
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     authCubit.togglePassword();
@@ -168,7 +168,7 @@ class RegisterScreen extends StatelessWidget {
                                   // the button will be unClickable as long as the state is loading .
 
                                   // here we called the register method (authCubit)
-                                  authCubit.registerFireBase();
+                                  authCubit.register();
                                 },
 
                                 // start creating (register ButtonIcon )
@@ -184,7 +184,7 @@ class RegisterScreen extends StatelessWidget {
                                       LocaleKeys.register.tr(),
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                       ),
                                     ),
                                   ),

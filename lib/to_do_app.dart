@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ToDoApp/model/cubits/pokemon/pokemon_cubit.dart';
 import 'package:ToDoApp/model/cubits/task/task_cubit.dart';
 import 'package:ToDoApp/model/cubits/theme/theme_cubit.dart';
 import 'package:ToDoApp/view/screens/splash/splash_screen.dart';
@@ -26,9 +25,9 @@ class ToDoApp extends StatelessWidget {
               BlocProvider(create: (context) => ThemeCubit()),
               BlocProvider(create: (context) => TaskCubit()),
               BlocProvider(create: (context) => AuthCubit()),
-              BlocProvider(create: (context) => PokemonCubit()),
             ],
             child: BlocBuilder<ThemeCubit, ThemeState>(
+              // we used bloc provider here to handle the themeMode
               builder: (context, state) {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,

@@ -1,18 +1,22 @@
-// creating the model
+// creating the task model
+
+import 'package:image_picker/image_picker.dart';
 
 class TaskModel {
   String? title;
   String? description;
   String? image;
+  XFile? myImage;
   String? startDate;
   String? endDate;
   int? id;
   String? status;
-// the constructor
+// the constructor of the taskModel
   TaskModel({
     this.title,
     this.description,
     this.image,
+    this.myImage,
     this.startDate,
     this.endDate,
     this.id,

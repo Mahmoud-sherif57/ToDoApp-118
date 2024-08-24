@@ -1,17 +1,13 @@
+
 import 'dart:io';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 import 'package:ToDoApp/model/cubits/task/task_cubit.dart';
 import 'package:ToDoApp/model/cubits/task/task_state.dart';
-import 'package:ToDoApp/view-model/utils/app_assets.dart';
 import 'package:ToDoApp/view-model/utils/app_colors.dart';
-import 'package:ToDoApp/view-model/utils/app_functions.dart';
 import 'package:ToDoApp/view-model/localization/local_keys.g.dart';
 import 'package:ToDoApp/view-model/utils/click_widget.dart';
 
@@ -36,15 +32,15 @@ class AddTaskWidget extends StatelessWidget {
               Expanded(
                 child: Text(
                   LocaleKeys.addTask.tr(),
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.black38),
                 ),
               ),
               IconButton(
                   onPressed: ()async {
-                    Navigator.pop(context);
                     TaskCubit.get(context).clearControllers();
-                    final player =AudioPlayer();
-                    await player.play(UrlSource(AppAssets.audio));
+                    Navigator.pop(context);
+                    // final player =AudioPlayer();
+                    // await player.play(UrlSource(AppAssets.audio));
 
                   },
 
@@ -87,27 +83,12 @@ class AddTaskWidget extends StatelessWidget {
             },
           ),
           SizedBox(height: 12.sp),
-          //  image form field
-          // TextFormField(
-          //   textInputAction: TextInputAction.next,
-          //   controller: TaskCubit.get(context).imageController,
-          //   decoration: InputDecoration(
-          //     labelText: LocaleKeys.image.tr(),
-          //   ),
-          //   validator: (value) {
-          //     if (value == null || value.isEmpty) {
-          //       return LocaleKeys.thisFieldsIsRequired.tr();
-          //     }
-          //     return null;
-          //   },
-          // ),
-          // SizedBox(height: 12.sp),
 
           // start of (start date) text form field
           TextFormField(
-            textInputAction: TextInputAction.next,
             controller: TaskCubit.get(context).startDateController,
             keyboardType: TextInputType.none,
+            textInputAction: TextInputAction.next,
             readOnly: true,
             decoration: InputDecoration(
               labelText: LocaleKeys.startDate.tr(),
@@ -177,9 +158,9 @@ class AddTaskWidget extends StatelessWidget {
             },
             withBorder: true,
             child: Visibility(
-              visible: TaskCubit.get(context).image == null,
+              visible: TaskCubit.get(context).MyImage == null,
               replacement:
-                  Image.file(File(TaskCubit.get(context).image?.path ?? "")),
+                  Image.file(File(TaskCubit.get(context).MyImage?.path ?? "")),
               child: BlocBuilder<TaskCubit, TaskState>(
                 buildWhen: (previous, current) {
                   return current is PickImageState;
@@ -188,7 +169,7 @@ class AddTaskWidget extends StatelessWidget {
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.image),
+                       Icon(Icons.image,color: AppColors.black38),
                       SizedBox(
                         height: 6.h,
                       ),
@@ -210,7 +191,9 @@ class AddTaskWidget extends StatelessWidget {
                 TaskCubit.get(context).addTaskToAPI().then(
                   (value) {
                     TaskCubit.get(context).clearControllers();
-                    AppFunctions.pop(context);
+
+                    Navigator.pop(context);
+                    // AppFunctions.pop(context);
                   },
                 );
               }
