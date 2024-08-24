@@ -1,6 +1,6 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_app/model/cubits/theme/theme_state.dart';
+import 'package:ToDoApp/model/cubits/theme/theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState>{
   ThemeCubit(): super(ThemeInitial());
@@ -13,5 +13,8 @@ class ThemeCubit extends Cubit<ThemeState>{
     isDark =! isDark ;
     emit(ThemeChanged());
   }
+
+
+
 
 }

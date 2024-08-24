@@ -1,4 +1,4 @@
-package com.Eraasoft.to_do_app;
+package com.Eraasoft.ToDoApp;
 
 import io.flutter.embedding.android.FlutterActivity;
 
